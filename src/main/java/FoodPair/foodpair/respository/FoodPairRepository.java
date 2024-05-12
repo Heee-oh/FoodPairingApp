@@ -13,13 +13,13 @@ public interface FoodPairRepository {
 
     Post save(Post post);
 
-    Optional<Post> findById(long id);
+    Optional<Post> findById(int id);
 
     List<Post> findAllPost();
 
-    void deletePost(long id);
+    void deletePost(int id);
 
-    Post update(long postId, UpdatePostDto updatePostDto);
-    public void updateViews(Long id);
+    Post update(int postId, UpdatePostDto updatePostDto);
+    void updateViews(int id);
 
 }

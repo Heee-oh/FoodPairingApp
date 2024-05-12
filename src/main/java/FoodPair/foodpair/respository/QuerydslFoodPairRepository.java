@@ -39,7 +39,7 @@ public class QuerydslFoodPairRepository implements FoodPairRepository {
     }
 
     @Override
-    public Optional<Post> findById(long id) {
+    public Optional<Post> findById(int id) {
         updateViews(id); // 조회수 증가
         Post post = em.find(Post.class, id);
         return Optional.ofNullable(post);
@@ -53,15 +53,27 @@ public class QuerydslFoodPairRepository implements FoodPairRepository {
     }
 
     @Override
-    public void deletePost(long id) {
+    public void deletePost(int id) {
         query.delete(post)
                 .where(post.id.eq(id))
                 .execute();
     }
 
     @Override
-    public Post update(long postId, UpdatePostDto updatePostDto) {
+    public Post update(int postId, UpdatePostDto updatePostDto) {
         return null;
+    }
+
+/*
+    @Override
+    public Post update(int postId, UpdatePostDto updatePostDto) {
+        return null;
+    }
+*/
+
+    @Override
+    public void updateViews(int id) {
+
     }
 
     public void updateViews(Long id) {

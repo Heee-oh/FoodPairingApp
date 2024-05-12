@@ -1,5 +1,6 @@
 package FoodPair.foodpair.config;
 
+import FoodPair.foodpair.respository.CommentRepository;
 import FoodPair.foodpair.respository.CommunityRepository;
 import FoodPair.foodpair.respository.FoodPairRepository;
 import FoodPair.foodpair.respository.QuerydslFoodPairRepository;
@@ -19,9 +20,10 @@ public class QuerydslConfig {
 
     private final CommunityRepository communityRepository;
 
+    private final CommentRepository commentRepository;
     @Bean
     public PostService postService() {
-        return new PostServiceV2(communityRepository);
+        return new PostServiceV2(communityRepository, commentRepository);
     }
 
     @Bean

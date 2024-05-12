@@ -1,5 +1,6 @@
 package FoodPair.foodpair.service;
 
+import FoodPair.foodpair.domain.Comment;
 import FoodPair.foodpair.domain.Member;
 import FoodPair.foodpair.domain.Post;
 import FoodPair.foodpair.domain.UpdatePostDto;
@@ -12,11 +13,15 @@ public interface PostService {
 
     Post save(Post post);
 
-    Optional<Post> findById(long id);
+    Comment save(Comment comment);
+
+    List<Comment> findComments(int id);
+
+    Optional<Post> findById(int id);
 
     List<Post> findAllPost();
 
-    void delete(long id);
+    void delete(int id);
 
     Post update(long postId, UpdatePostDto updatePostDto);
 }

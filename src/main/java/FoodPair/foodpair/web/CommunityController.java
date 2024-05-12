@@ -1,5 +1,6 @@
 package FoodPair.foodpair.web;
 
+import FoodPair.foodpair.domain.Comment;
 import FoodPair.foodpair.domain.Post;
 import FoodPair.foodpair.domain.UpdatePostDto;
 import FoodPair.foodpair.service.PostService;
@@ -25,8 +26,11 @@ public class CommunityController {
         return postService.save(post);
     }
 
+    // detail의 경우 댓글과 post를 둘다 반환해야함
+    // 새로운 domain을 만드는것을 고려
+
     @GetMapping("/post/{postId}")
-    public Optional<Post> postDetail(@PathVariable long postId) {
+    public Optional<Post> postDetail(@PathVariable int postId) {
         return postService.findById(postId);
     }
 
@@ -36,7 +40,7 @@ public class CommunityController {
     }
 
     @DeleteMapping("/post/{postId}")
-    public HttpEntity<String> deletePost(@PathVariable long postId) {
+    public HttpEntity<String> deletePost(@PathVariable int postId) {
         postService.delete(postId);
         return new ResponseEntity<>("삭제 완료", HttpStatus.OK);
     }
@@ -44,6 +48,16 @@ public class CommunityController {
     @GetMapping("/post")
     public List<Post> findPosts() {
         return postService.findAllPost();
+    }
+
+    @PostMapping("/saveComent")
+    public Comment save(@RequestBody Comment comment) {
+        return postService.save(comment);
+    }
+
+    @GetMapping("/post/{postId}/comment")
+    public List<Comment> findComments(@PathVariable int postId) {
+        return postService.findComments(postId);
     }
 
 

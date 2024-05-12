@@ -13,8 +13,10 @@ public class Comment {
     @Column(name = "parent_id")
     private Integer parentId;
     @Column(name = "post_id")
-    private Integer PostId;
+    private Integer postId;
     private Long uuid;
+    private String content;
+
 
     public Comment() {
     }
