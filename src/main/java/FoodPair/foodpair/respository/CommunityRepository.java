@@ -8,10 +8,10 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface CommunityRepository extends JpaRepository<Post, Long> {
+public interface CommunityRepository extends JpaRepository<Post, Integer> {
     @Modifying
     @Query("update community set viewCount = viewCount + 1 where id = :id")
-    void updateViews(@Param("id") Long id);
+    void updateViews(@Param("id") int id);
 
 
 }

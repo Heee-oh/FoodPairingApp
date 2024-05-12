@@ -1,8 +1,10 @@
 package FoodPair.foodpair.service;
 
+import FoodPair.foodpair.domain.Comment;
 import FoodPair.foodpair.domain.Member;
 import FoodPair.foodpair.domain.Post;
 import FoodPair.foodpair.domain.UpdatePostDto;
+import FoodPair.foodpair.respository.CommentRepository;
 import FoodPair.foodpair.respository.CommunityRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,7 @@ public class PostServiceV2 implements PostService {
 
     private final CommunityRepository communityRepository;
 
+    private final CommentRepository commentRepository;
     @Override
     public Member save(Member member) {
         return member;
@@ -33,7 +36,17 @@ public class PostServiceV2 implements PostService {
     }
 
     @Override
-    public Optional<Post> findById(long id) {
+    public Comment save(Comment comment) {
+        return commentRepository.save(comment);
+    }
+
+    @Override
+    public List<Comment> findComments(int id) {
+        return commentRepository.findAll();
+    }
+
+    @Override
+    public Optional<Post> findById(int id) {
         communityRepository.updateViews(id);
         return communityRepository.findById(id);
     }
@@ -44,7 +57,8 @@ public class PostServiceV2 implements PostService {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(int id) {
+        commentRepository.deleteCommentsByPostId(id);
         communityRepository.delete(findById(id).get());
     }
 
