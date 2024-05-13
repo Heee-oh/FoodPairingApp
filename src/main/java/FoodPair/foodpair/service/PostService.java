@@ -13,10 +13,6 @@ public interface PostService {
 
     Post save(Post post);
 
-    Comment save(Comment comment);
-
-    List<Comment> findComments(int id);
-
     Optional<Post> findById(int id);
 
     List<Post> findAllPost();
@@ -24,4 +20,10 @@ public interface PostService {
     void delete(int id);
 
     Post update(long postId, UpdatePostDto updatePostDto);
+
+    Comment save(Comment comment, int postId);
+
+    List<Comment> findComments(int id);
+
+    void deleteCommentById(int commentId, int postId);
 }

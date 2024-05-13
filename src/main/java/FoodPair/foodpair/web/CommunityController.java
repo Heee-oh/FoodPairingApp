@@ -1,10 +1,12 @@
 package FoodPair.foodpair.web;
 
 import FoodPair.foodpair.domain.Comment;
+import FoodPair.foodpair.domain.GetPostDto;
 import FoodPair.foodpair.domain.Post;
 import FoodPair.foodpair.domain.UpdatePostDto;
 import FoodPair.foodpair.service.PostService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,8 +32,8 @@ public class CommunityController {
     // 새로운 domain을 만드는것을 고려
 
     @GetMapping("/post/{postId}")
-    public Optional<Post> postDetail(@PathVariable int postId) {
-        return postService.findById(postId);
+    public Optional<GetPostDto> postDetail(@PathVariable int postId) {
+        return Optional.of(new GetPostDto(postService.findById(postId).get(), postService.findComments(postId)));
     }
 
     @PostMapping("/post/{postId}")
@@ -50,9 +52,11 @@ public class CommunityController {
         return postService.findAllPost();
     }
 
-    @PostMapping("/saveComent")
-    public Comment save(@RequestBody Comment comment) {
-        return postService.save(comment);
+
+
+    @PostMapping("/post/{postId}/saveComment")
+    public Comment save(@RequestBody Comment comment, @PathVariable int postId) {
+        return postService.save(comment, postId);
     }
 
     @GetMapping("/post/{postId}/comment")
@@ -60,7 +64,11 @@ public class CommunityController {
         return postService.findComments(postId);
     }
 
-
+    @DeleteMapping("/post/{postId}/comment/{commentId}")
+    public HttpEntity<String> deleteComment(@PathVariable int postId, @PathVariable int commentId) {
+        postService.deleteCommentById(commentId, postId);
+        return new ResponseEntity<>("삭제 성공", HttpStatus.OK);
+    }
 
 
 }

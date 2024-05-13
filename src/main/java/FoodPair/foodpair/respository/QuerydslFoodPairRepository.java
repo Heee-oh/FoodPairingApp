@@ -26,60 +26,14 @@ public class QuerydslFoodPairRepository implements FoodPairRepository {
         this.query = new JPAQueryFactory(em);
     }
 
-    @Override
-    public Member save(Member member) {
-        em.persist(member);
-        return member;
-    }
 
     @Override
-    public Post save(Post post) {
-        em.persist(post);
-        return post;
+    public void addLikePost() {
+
     }
 
     @Override
-    public Optional<Post> findById(int id) {
-        updateViews(id); // 조회수 증가
-        Post post = em.find(Post.class, id);
-        return Optional.ofNullable(post);
-    }
-
-    @Override
-    public List<Post> findAllPost() {
-        return query.select(post)
-                .from(post)
-                .fetch();
-    }
-
-    @Override
-    public void deletePost(int id) {
-        query.delete(post)
-                .where(post.id.eq(id))
-                .execute();
-    }
-
-    @Override
-    public Post update(int postId, UpdatePostDto updatePostDto) {
-        return null;
-    }
-
-/*
-    @Override
-    public Post update(int postId, UpdatePostDto updatePostDto) {
-        return null;
-    }
-*/
-
-    @Override
-    public void updateViews(int id) {
+    public void updateCommentCount() {
 
     }
-
-    public void updateViews(Long id) {
-        em.createQuery("update community set viewCount = viewCount + 1 where id = " + id)
-                .executeUpdate();
-    }
-
-
 }

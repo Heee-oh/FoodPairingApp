@@ -7,11 +7,42 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface CommunityRepository extends JpaRepository<Post, Integer> {
+
+
+    // 본인 작성 글 조회
+    //List<Post> findPostsByUuid();
+
+
+    // 조회수 업데이트
     @Modifying
     @Query("update community set viewCount = viewCount + 1 where id = :id")
     void updateViews(@Param("id") int id);
+
+    // 좋아요 +1 - 1
+    @Modifying
+    @Query("update community set likeConut = likeConut + :value where id= :id")
+    void updateLikeCount(@Param("value") int value, @Param("id") int id);
+
+    // 댓글 +1 -1
+    @Modifying
+    @Query("update community set commentConut = commentConut + :value where id= :id")
+    void updateCommentCount(@Param("value") int value, @Param("id") int postId);
+
+
+    // 좋아요 체크 테이블에 생성
+    @Modifying
+    @Query(value = "insert into check_like (post_id, uuid, like_check) values (:id, :uuid, :check)", nativeQuery = true)
+    void checkLike(@Param("id") int id, @Param("uuid") long uuid, @Param("check") boolean check);
+
+
+    // 체크테이블 업데이트
+    @Modifying
+    @Query(value = "update check_like set like_check = like_check + :tf where post_id=:id and uuid=:uuid", nativeQuery = true)
+    void updateLike(@Param("id") int id, @Param("uuid") long uuid, @Param("tf") boolean value);
 
 
 }
