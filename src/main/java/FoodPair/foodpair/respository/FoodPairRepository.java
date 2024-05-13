@@ -9,17 +9,9 @@ import java.util.Optional;
 
 public interface FoodPairRepository {
 
-    Member save(Member member);
+    void addLikePost();
 
-    Post save(Post post);
+    void updateCommentCount();
 
-    Optional<Post> findById(int id);
-
-    List<Post> findAllPost();
-
-    void deletePost(int id);
-
-    Post update(int postId, UpdatePostDto updatePostDto);
-    void updateViews(int id);
 
 }

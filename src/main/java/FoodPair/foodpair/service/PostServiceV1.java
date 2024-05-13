@@ -21,17 +21,18 @@ import java.util.Optional;
 @Service
 @Transactional
 @RequiredArgsConstructor
-public class PostServiceV1 implements PostService {
+public class PostServiceV1 {
 
     private final FoodPairRepository foodPairRepository;
-    @Override
-    public Member save(Member member) {
-        return member;
-    }
+//    @Override
+//    public Member save(Member member) {
+//        return member;
+//    }
+/*
 
     @Override
     public Post save(Post post) {
-        setDefaultpost(post);
+        post.setDefaultValue();
         return foodPairRepository.save(post);
     }
 
@@ -78,12 +79,8 @@ public class PostServiceV1 implements PostService {
         // 고민중
         return foodPairRepository.update(postId, updatePostDto);
     }
+*/
 
-    private void setDefaultpost(Post post) {
-        post.setCreateAt(LocalDateTime.now());
-        post.setViewCount(0);
-        post.setCommentConut(0);
-        post.setLikeConut(0);
-    }
+
 
 }

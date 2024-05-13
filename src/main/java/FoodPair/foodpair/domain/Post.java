@@ -7,7 +7,7 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity(name = "community")
-@Getter @Setter
+@Getter
 public class Post {
     @Id @Column(name = "post_id") @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -33,5 +33,26 @@ public class Post {
     public Post() {
     }
 
+    private void setViewCount(Integer viewCount) {
+        this.viewCount = viewCount;
+    }
 
+    private void setCommentConut(Integer commentConut) {
+        this.commentConut = commentConut;
+    }
+
+    private void setLikeConut(Integer likeConut) {
+        this.likeConut = likeConut;
+    }
+
+    private void setCreateAt(LocalDateTime createAt) {
+        this.createAt = createAt;
+    }
+
+    public void setDefaultValue() {
+        setCreateAt(LocalDateTime.now());
+        setViewCount(0);
+        setCommentConut(0);
+        setLikeConut(0);
+    }
 }
