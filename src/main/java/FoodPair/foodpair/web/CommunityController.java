@@ -6,6 +6,7 @@ import FoodPair.foodpair.domain.Post;
 import FoodPair.foodpair.domain.UpdatePostDto;
 import FoodPair.foodpair.service.PostService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
@@ -16,12 +17,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Optional;
 
-@RequestMapping("/api")
+@RequestMapping("")
 @RestController
+@Slf4j
 @RequiredArgsConstructor
 public class CommunityController {
 
     private final PostService postService;
+
+    @GetMapping("/hello1")
+    public String test() {
+        return "Hello, world!";
+    }
+
 
     @PostMapping("/savePost")
     public Post savePost(@RequestBody Post post) {
