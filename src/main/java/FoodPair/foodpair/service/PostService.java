@@ -1,7 +1,7 @@
 package FoodPair.foodpair.service;
 
 import FoodPair.foodpair.domain.Comment;
-import FoodPair.foodpair.domain.Member;
+import FoodPair.foodpair.domain.User;
 import FoodPair.foodpair.domain.Post;
 import FoodPair.foodpair.domain.UpdatePostDto;
 
@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface PostService {
-    Member save(Member member);
+    User save(User user);
 
     Post save(Post post);
 

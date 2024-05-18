@@ -2,11 +2,8 @@ package FoodPair.foodpair.domain;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.tomcat.util.json.JSONParser;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.json.JsonParser;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -119,15 +116,9 @@ public class KakaoApi {
             log.info("responseBody = {}", result);
 
             JsonNode rootNode = objectMapper.readTree(result);
-
             JsonNode properties = rootNode.get("properties");
-            JsonNode kakaoAccount = rootNode.get("kakao_account");
-
             String nickname = properties.get("nickname").asText();
-            String email = kakaoAccount.get("email").asText();
-
             userInfo.put("nickname", nickname);
-            userInfo.put("email", email);
 
             br.close();
 
@@ -138,7 +129,7 @@ public class KakaoApi {
     }
 
 
-    public String getUserUuid(String accessToken) {
+    public Long getUserUuid(String accessToken) {
         RestTemplate restTemplate = new RestTemplate();
         String userInfoUri = "https://kapi.kakao.com/v2/user/me";
 
@@ -160,6 +151,6 @@ public class KakaoApi {
             e.printStackTrace();
         }
 
-        return uuid;
+        return Long.valueOf(uuid);
     }
 }
