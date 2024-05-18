@@ -1,21 +1,10 @@
 package FoodPair.foodpair.service;
 
-import FoodPair.foodpair.domain.Comment;
-import FoodPair.foodpair.domain.Member;
-import FoodPair.foodpair.domain.Post;
-import FoodPair.foodpair.domain.UpdatePostDto;
 import FoodPair.foodpair.respository.FoodPairRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.ModelAttribute;
-
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.Optional;
 
 @Slf4j
 @Service

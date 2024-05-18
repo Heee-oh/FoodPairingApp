@@ -1,7 +1,7 @@
 package FoodPair.foodpair.service;
 
 import FoodPair.foodpair.domain.Comment;
-import FoodPair.foodpair.domain.Member;
+import FoodPair.foodpair.domain.User;
 import FoodPair.foodpair.domain.Post;
 import FoodPair.foodpair.domain.UpdatePostDto;
 import FoodPair.foodpair.respository.CommentRepository;
@@ -11,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,8 +23,8 @@ public class PostServiceV2 implements PostService {
     private final CommentRepository commentRepository;
 
     @Override
-    public Member save(Member member) {
-        return member;
+    public User save(User user) {
+        return user;
     }
 
     @Override
