@@ -54,7 +54,7 @@ public class UserController {
         String token = jwtTokenProvider.createToken(user.getUuid().toString());
 
         // 쿠키 생성 및 설정
-        Cookie cookie = new Cookie("AUTH-TOKEN", token);
+        Cookie cookie = new Cookie("access_Token", token);
         cookie.setPath("/");
         cookie.setHttpOnly(true); // XSS 공격 방지
 
