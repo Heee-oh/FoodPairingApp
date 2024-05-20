@@ -1,10 +1,12 @@
 package FoodPair.foodpair.respository;
 
 import FoodPair.foodpair.domain.Post;
+import FoodPair.foodpair.domain.UpdatePostDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -40,7 +42,14 @@ public interface CommunityRepository extends JpaRepository<Post, Integer> {
     // 체크테이블 업데이트
     @Modifying
     @Query(value = "update check_like set like_check = :tf where post_id=:id and uuid=:uuid", nativeQuery = true)
-    void updateLike(@Param("id") int id, @Param("uuid") long uuid, @Param("tf") boolean value);
+    void updateLike(@Param("id") int id, @Param("uuid") long uuid, @Param("tf") int value);
 
+
+    @Query(value = "select like_check from check_like where post_id=:id and uuid=:uuid", nativeQuery = true)
+    Integer findCheckLikeById(int id, long uuid);
+
+    @Modifying
+    @Query(value = "update community set content = :content, anon_status=:anonStatus, wine_id=:windId where post_id=:id", nativeQuery = true)
+    void updatePost(@Param("id") int id, @Param("content") String content, @Param("anonStatus") boolean anonStatus, @Param("windId") int windId );
 
 }

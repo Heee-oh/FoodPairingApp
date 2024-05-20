@@ -49,7 +49,8 @@ public class WebSecurityConfig {
                         // antMatchers() 최신버전 기준 삭제됨
                         .requestMatchers("/api/auth/**"
                                 ,"http://localhost8080/auth"
-                                ,"/Auth").permitAll()
+                                ,"/Auth"
+                                ,"/**").permitAll()
                         // 나머지 모든 API는 Jwt 인증 필요
                         .anyRequest().authenticated()
                 )
