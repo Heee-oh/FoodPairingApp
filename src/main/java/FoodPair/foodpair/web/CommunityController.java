@@ -45,8 +45,9 @@ public class CommunityController {
     }
 
     @PostMapping("/post/{postId}")
-    public Post updatePost(@PathVariable long postId, @RequestBody UpdatePostDto updatePostDto) {
-        return postService.update(postId, updatePostDto);
+    public ResponseEntity<String> updatePost(@PathVariable int postId, @RequestBody UpdatePostDto updatePostDto) {
+        postService.update(postId, updatePostDto);
+        return new ResponseEntity<>("업데이트 완료", HttpStatus.OK);
     }
 
     @DeleteMapping("/post/{postId}")
@@ -77,6 +78,14 @@ public class CommunityController {
         postService.deleteCommentById(commentId, postId);
         return new ResponseEntity<>("삭제 성공", HttpStatus.OK);
     }
+
+    @PostMapping("/post/{postId}/like")
+    public void updateLikeCount(@PathVariable int postId) {
+        postService.updateLikeCount(postId);
+    }
+
+
+
 
 
 }

@@ -13,9 +13,6 @@ public class Wine {
     private String name;
     @Column(name = "image_src")
     private String imageSrc;
-
-    @Column(name = "alcohol_content")
-    private Integer alcoholContent;
     private String description;
     @Column(name = "pairing_food")
     private String food;
