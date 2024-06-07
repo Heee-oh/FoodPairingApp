@@ -25,8 +25,8 @@ public class PostServiceV2 implements PostService {
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
-    public Post save(Post post) {
-        post.setDefaultValue();
+    public Post save(Post post, long id) {
+        post.setDefaultValue(id);
         return communityRepository.save(post);
     }
 

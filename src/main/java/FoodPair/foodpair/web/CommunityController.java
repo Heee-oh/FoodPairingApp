@@ -1,10 +1,10 @@
 package FoodPair.foodpair.web;
 
-import FoodPair.foodpair.domain.Comment;
-import FoodPair.foodpair.domain.GetPostDto;
-import FoodPair.foodpair.domain.Post;
-import FoodPair.foodpair.domain.UpdatePostDto;
+import FoodPair.foodpair.domain.*;
+import FoodPair.foodpair.respository.WineRepository;
 import FoodPair.foodpair.service.PostService;
+import FoodPair.foodpair.service.WineService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.repository.query.Param;
@@ -24,6 +24,8 @@ import java.util.Optional;
 public class CommunityController {
 
     private final PostService postService;
+    private final JwtTokenProvider jwtTokenProvider;
+    private final WineService wineService;
 
     @GetMapping("/hello1")
     public String test() {
@@ -32,8 +34,10 @@ public class CommunityController {
 
 
     @PostMapping("/savePost")
-    public Post savePost(@RequestBody Post post) {
-        return postService.save(post);
+    public Post savePost(@RequestBody Post post, HttpServletRequest request) {
+        log.info("입장");
+        String userPk = jwtTokenProvider.getUserPk(jwtTokenProvider.resolveToken(request));
+        return postService.save(post, Long.parseLong(userPk));
     }
 
     // detail의 경우 댓글과 post를 둘다 반환해야함
@@ -58,6 +62,7 @@ public class CommunityController {
 
     @GetMapping("/post")
     public List<Post> findPosts() {
+        log.info("게시물 전체");
         return postService.findAllPost();
     }
 
@@ -84,7 +89,11 @@ public class CommunityController {
         postService.updateLikeCount(postId);
     }
 
-
+    @GetMapping("/wine")
+    public List<Wine> findWine() {
+        log.info("wine={}",  wineService.findWinesByPairingFood("steak"));
+        return wineService.findWinesByPairingFood("steak");
+    }
 
 
 

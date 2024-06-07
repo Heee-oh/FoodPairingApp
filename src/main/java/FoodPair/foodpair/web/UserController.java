@@ -38,7 +38,7 @@ public class UserController {
         authCheck(accessToken, response);
 
         // 성공 응답 반환
-        return new ResponseEntity<>(accessToken, ResponseCode.USER_LOGIN_SUCCESS.getHttpStatus());
+        return ResponseEntity.ok().body("login successful");
     }
 
     private void authCheck(String accessToken, HttpServletResponse response) {
@@ -55,8 +55,9 @@ public class UserController {
 
         // 쿠키 생성 및 설정
         Cookie cookie = new Cookie("access_Token", token);
+        log.info("cookie={}", cookie.getValue());
         cookie.setPath("/");
-        cookie.setHttpOnly(true); // XSS 공격 방지
+        cookie.setMaxAge(60 * 60 * 24);
 
         // 쿠키를 응답에 추가
         response.addCookie(cookie);
