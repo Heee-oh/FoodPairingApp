@@ -12,19 +12,9 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class UpdatePostDto {
 
-    private Long id;
 
-    private Long uuid;
-
-    private Integer viewCount;
-
-    private Integer commentConut;
-
-    private Integer likeConut;
 
     private String content;
-
-    private String imageSrc;
 
     private Boolean anonStatus;
 
@@ -32,8 +22,6 @@ public class UpdatePostDto {
 
     private LocalDateTime createAt;
 
-    // 9개로 받아서 변화된 부분만 체크
-    private Long[] changeIndex;
 
 
 

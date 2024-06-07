@@ -8,6 +8,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -37,6 +38,7 @@ public class User implements UserDetails {
         this.uuid = uuid;
         this.nickname = nickname;
         this.favoriteDrink = favoriteDrink;
+        this.createAt = LocalDateTime.now();
     }
 
     private void setFavorite_drink(String favoriteDrink) {

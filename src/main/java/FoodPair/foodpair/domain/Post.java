@@ -50,10 +50,16 @@ public class Post {
         this.createAt = createAt;
     }
 
-    public void setDefaultValue() {
+    public void setUuid(Long uuid) {
+        this.uuid = uuid;
+    }
+
+    public void setDefaultValue(long id) {
         setCreateAt(LocalDateTime.now());
         setViewCount(0);
         setCommentConut(0);
         setLikeConut(0);
+        setUuid(id);
+
     }
 }

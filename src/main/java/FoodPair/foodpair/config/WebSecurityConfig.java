@@ -47,9 +47,10 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(auth -> auth
                         // 회원가입, 로그인 관련 API는 Jwt 인증 없이 접근 가능
                         // antMatchers() 최신버전 기준 삭제됨
-                        .requestMatchers("/api/auth/**"
-                                ,"http://localhost8080/auth"
-                                ,"/Auth").permitAll()
+                        .requestMatchers("/api/Auth/**"
+                                ,"http://localhost8080/Auth"
+                                ,"/Auth"
+                        ,"/**").permitAll()
                         // 나머지 모든 API는 Jwt 인증 필요
                         .anyRequest().authenticated()
                 )
@@ -60,6 +61,7 @@ public class WebSecurityConfig {
         return http.build();
     }
 
+
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
@@ -69,9 +71,11 @@ public class WebSecurityConfig {
         config.setAllowedHeaders(Arrays.asList("Authorization", "Cache-Control", "Content-Type")); // 허용하는 헤더
         config.setMaxAge(3600L); // 사전 요청(pre-flight) 캐싱 시간
 
+
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", config); // 설정 적용 경로
         return source;
     }
+
 
 }

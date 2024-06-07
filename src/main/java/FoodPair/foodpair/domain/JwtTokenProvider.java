@@ -7,6 +7,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -18,6 +19,7 @@ import java.util.Base64;
 import java.util.Date;
 
 @Component
+@Slf4j
 @RequiredArgsConstructor
 public class JwtTokenProvider {
 
@@ -39,7 +41,7 @@ public class JwtTokenProvider {
         return Jwts.builder()
                 .setClaims(claims) // 정보 저장
                 .setIssuedAt(now) // 토큰 발행 시간 정보
-                .setExpiration(new Date(now.getTime() + (30 * 60 * 1000L))) // 토큰 유효시각 설정 (30분)
+                .setExpiration(new Date(now.getTime() + (60 * 60 * 1000L))) // 토큰 유효시각 설정 (30분)
                 .signWith(SignatureAlgorithm.HS256, secretKey)  // 암호화 알고리즘과, secret 값
                 .compact();
     }
@@ -67,6 +69,9 @@ public class JwtTokenProvider {
 
     // Request의 Header에서 token 값 가져오기
     public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("X-AUTH-TOKEN");
+        String authorization = request.getHeader("Authorization");
+        log.info(authorization);
+
+        return authorization;
     }
 }
