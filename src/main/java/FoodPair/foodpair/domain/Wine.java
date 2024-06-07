@@ -9,9 +9,11 @@ import lombok.Setter;
 @Table(name = "wine")
 public class Wine {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int wineId;
+
 
     @Column(name = "name")
     private String name;
@@ -23,10 +25,13 @@ public class Wine {
     private String description;
 
     @Column(name = "pairing_food")
+
     private String pairingFood;
+
 
     @Column(name = "note")
     private String note;
+
 
     @Override
     public String toString() {
@@ -38,5 +43,6 @@ public class Wine {
                 ", pairingFood='" + pairingFood + '\'' +
                 ", note='" + note + '\'' +
                 '}';
+
     }
 }
