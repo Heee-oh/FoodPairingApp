@@ -113,6 +113,7 @@ public class KakaoApi {
             while((line = br.readLine()) != null){
                 responseSb.append(line);
             }
+
             String result = responseSb.toString();
             log.info("responseBody = {}", result);
 

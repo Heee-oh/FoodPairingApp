@@ -86,7 +86,7 @@ public class ImageController {
             for (Wine wine : wines) {
                 log.info("Pairing wines={}",wine);
             }
-
+            imageService.saveImage(file);
             // 조회된 와인 정보를 프론트엔드로 응답
             return new ResponseEntity<>(wines, HttpStatus.OK);
         } catch (IOException e) {

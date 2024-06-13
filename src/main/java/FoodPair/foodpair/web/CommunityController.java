@@ -37,6 +37,7 @@ public class CommunityController {
     public Post savePost(@RequestBody Post post, HttpServletRequest request) {
         log.info("입장");
         String userPk = jwtTokenProvider.getUserPk(jwtTokenProvider.resolveToken(request));
+        log.info("post={}", post.getImageSrc());
         return postService.save(post, Long.parseLong(userPk));
     }
 
