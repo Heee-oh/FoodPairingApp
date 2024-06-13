@@ -26,7 +26,7 @@ public class Wine {
 
     @Column(name = "pairing_food")
 
-    private String pairingFood;
+    private String food;
 
 
     @Column(name = "note")
@@ -40,7 +40,7 @@ public class Wine {
                 ", name='" + name + '\'' +
                 ", imageSrc='" + imageSrc + '\'' +
                 ", description='" + description + '\'' +
-                ", pairingFood='" + pairingFood + '\'' +
+                ", pairingFood='" + food + '\'' +
                 ", note='" + note + '\'' +
                 '}';
 

@@ -38,7 +38,8 @@ public class PostServiceV2 implements PostService {
 
     @Override
     public List<Post> findAllPost() {
-        return communityRepository.findAll();
+//        return communityRepository.findAll();
+        return communityRepository.getPosts();
     }
 
     @Override

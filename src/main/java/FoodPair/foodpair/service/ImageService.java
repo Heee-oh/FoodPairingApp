@@ -26,7 +26,7 @@ public class ImageService {
 
     public Image saveImage(MultipartFile file) throws IOException {
         // 파일 저장 경로 설정
-        String folder = "C:/Users/User/Desktop/project3/public/images/";
+        String folder = "C:/Users/User/Desktop/foodpair/src/main/front/public/images/";
         File directory = new File(folder);
         if (!directory.exists()) {
             directory.mkdirs();

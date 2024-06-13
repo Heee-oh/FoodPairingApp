@@ -8,6 +8,7 @@ import FoodPair.foodpair.service.WineService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
@@ -22,30 +23,24 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("")
 public class ImageController {
 
-
-    private RestTemplate restTemplate;
-    private WineService wineService;
+    private final RestTemplate restTemplate;
+    private final WineService wineService;
     private final ImageService imageService;
 
     @PostMapping("/upload")
-    public Image uploadImage(@RequestParam("file") MultipartFile file) throws IOException {
-        return imageService.saveImage(file);
-    }
-    @PostMapping("/uploads")
     public ResponseEntity<?> handleFileUpload(@RequestParam("file") MultipartFile file) {
         // 파이썬 서버로 이미지 전송
-        String pythonServerUrl = "http://172.17.152.143:5000/predict";
-
+        String pythonServerUrl = "localhost:5000/predict";
         try {
+            imageService.saveImage(file);
             // 파일 이름 로그 출력
-            System.out.println("Uploading file: " + file.getOriginalFilename());
-
+            log.info("Uploading file={}",file.getOriginalFilename());
             // MultipartFile을 ByteArrayResource로 변환
             ByteArrayResource imageResource = new ByteArrayResource(file.getBytes()) {
                 @Override
@@ -64,16 +59,16 @@ public class ImageController {
             HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
 
             // 요청 전송 로그 출력
-            System.out.println("Sending request to Python server...");
+            log.info("Sending request to Python server...");
 
             // 파이썬 서버로 POST 요청 전송
             ResponseEntity<String> response = restTemplate.postForEntity(pythonServerUrl, requestEntity, String.class);
 
             // 응답 수신 로그 출력
-            System.out.println("Received response from Python server: " + response.getStatusCode());
+            log.info("Received response from Python server={}", response.getStatusCode());
 
             // Python 서버로부터 받은 응답 본문 로그 출력
-            System.out.println("Response body from Python server: " + response.getBody());
+            log.info("Response body from Python server={}", response.getBody());
 
             // ObjectMapper 인스턴스 생성
             ObjectMapper objectMapper = new ObjectMapper();
@@ -87,9 +82,8 @@ public class ImageController {
             List<Wine> wines = wineService.findWinesByPairingFood(predictedClass);
 
             // 조회된 와인 정보 로그 출력
-            System.out.println("Pairing wines:");
             for (Wine wine : wines) {
-                System.out.println(wine);
+                log.info("Pairing wines={}",wine);
             }
 
             // 조회된 와인 정보를 프론트엔드로 응답
