@@ -1,17 +1,17 @@
 package FoodPair.foodpair.service;
 
-import FoodPair.foodpair.domain.Comment;
-import FoodPair.foodpair.domain.JwtTokenProvider;
-import FoodPair.foodpair.domain.Post;
-import FoodPair.foodpair.domain.UpdatePostDto;
+import FoodPair.foodpair.domain.*;
 import FoodPair.foodpair.respository.CommentRepository;
 import FoodPair.foodpair.respository.CommunityRepository;
+import FoodPair.foodpair.respository.QuerydslFoodPairRepository;
+import FoodPair.foodpair.respository.WineRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +22,7 @@ import java.util.Optional;
 public class PostServiceV2 implements PostService {
     private final CommunityRepository communityRepository;
     private final CommentRepository commentRepository;
+    private final QuerydslFoodPairRepository querydslFoodPairRepository;
     private final JwtTokenProvider jwtTokenProvider;
 
     @Override
@@ -37,9 +38,9 @@ public class PostServiceV2 implements PostService {
     }
 
     @Override
-    public List<Post> findAllPost() {
-//        return communityRepository.findAll();
-        return communityRepository.getPosts();
+    public List<PostDto> findAllPost() {
+        List<PostDto> allPostsWithWine = querydslFoodPairRepository.findAllPostsWithWine();
+        return allPostsWithWine;
     }
 
     @Override

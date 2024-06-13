@@ -1,6 +1,7 @@
 package FoodPair.foodpair.respository;
 
-import FoodPair.foodpair.domain.QWine;
+import FoodPair.foodpair.domain.*;
+import com.querydsl.core.Tuple;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
 
@@ -8,8 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import FoodPair.foodpair.domain.Wine;
-
+import java.util.ArrayList;
 import java.util.List;
 
 @Slf4j
@@ -45,6 +45,29 @@ public class QuerydslFoodPairRepository implements FoodPairRepository {
                 .where(qWine.food.isNull())
                 .limit(3)
                 .fetch();
+    }
+
+
+    public List<PostDto> findAllPostsWithWine() {
+        QPost qPost = QPost.post;
+        QWine qWine = QWine.wine;
+
+        List<Tuple> fetch = query.select(qPost, qWine)
+                .from(qPost)
+                .join(qWine).on(qWine.wineId.eq(qPost.wineId))
+                .orderBy(qPost.id.desc())
+                .fetch();
+
+        List<PostDto> postDtos = new ArrayList<>();
+
+        for (Tuple tuple : fetch) {
+            Post post = tuple.get(qPost);
+            Wine wine = tuple.get(qWine);
+            PostDto postDto = new PostDto(post, wine);
+            postDtos.add(postDto);
+        }
+
+        return postDtos;
     }
 
 /*

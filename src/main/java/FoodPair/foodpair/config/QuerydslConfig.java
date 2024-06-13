@@ -23,9 +23,10 @@ public class QuerydslConfig {
     private final WineRepository wineRepository;
 
     private final JwtTokenProvider jwtTokenProvider;
+    private final QuerydslFoodPairRepository querydslFoodPairRepository;
     @Bean
     public PostService postService() {
-        return new PostServiceV2(communityRepository, commentRepository, jwtTokenProvider);
+        return new PostServiceV2(communityRepository, commentRepository, querydslFoodPairRepository, jwtTokenProvider);
     }
 
     @Bean

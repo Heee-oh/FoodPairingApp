@@ -36,9 +36,8 @@ public class ImageController {
     @PostMapping("/upload")
     public ResponseEntity<?> handleFileUpload(@RequestParam("file") MultipartFile file) {
         // 파이썬 서버로 이미지 전송
-        String pythonServerUrl = "localhost:5000/predict";
+        String pythonServerUrl = "http://127.0.0.1:5000/predict";
         try {
-            imageService.saveImage(file);
             // 파일 이름 로그 출력
             log.info("Uploading file={}",file.getOriginalFilename());
             // MultipartFile을 ByteArrayResource로 변환
@@ -48,6 +47,8 @@ public class ImageController {
                     return file.getOriginalFilename();
                 }
             };
+
+//            imageService.saveImage(file);
 
             // HttpEntity 생성
             MultiValueMap<String, Object> body = new LinkedMultiValueMap<>();

@@ -1,6 +1,7 @@
 package FoodPair.foodpair.respository;
 
 import FoodPair.foodpair.domain.Post;
+import FoodPair.foodpair.domain.PostDto;
 import FoodPair.foodpair.domain.UpdatePostDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
@@ -18,8 +19,6 @@ public interface CommunityRepository extends JpaRepository<Post, Integer> {
     // 본인 작성 글 조회
     List<Post> findPostsByUuid(long uuid);
 
-    @Query("select c from community c order by c.id desc")
-    List<Post> getPosts ();
 
     // 조회수 업데이트
     @Modifying

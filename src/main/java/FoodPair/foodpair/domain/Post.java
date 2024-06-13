@@ -26,8 +26,10 @@ public class Post {
     private String imageSrc;
     @Column(name = "anon_status")
     private Boolean anonStatus;
+
     @Column(name = "wine_id")
     private Integer wineId;
+
     @Column
     private LocalDateTime createAt;
 

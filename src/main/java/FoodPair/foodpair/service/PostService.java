@@ -2,6 +2,7 @@ package FoodPair.foodpair.service;
 
 import FoodPair.foodpair.domain.Comment;
 import FoodPair.foodpair.domain.Post;
+import FoodPair.foodpair.domain.PostDto;
 import FoodPair.foodpair.domain.UpdatePostDto;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Optional;
 public interface PostService {
     Post save(Post post, long id);
     Optional<Post> findById(int id);
-    List<Post> findAllPost();
+    List<PostDto> findAllPost();
     void delete(int id);
     void update(int postId, UpdatePostDto updatePostDto);
     Comment save(Comment comment, int postId);
