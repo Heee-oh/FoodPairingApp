@@ -1,6 +1,7 @@
 package FoodPair.foodpair.respository;
 
 import FoodPair.foodpair.domain.Post;
+import FoodPair.foodpair.domain.PostDto;
 import FoodPair.foodpair.domain.UpdatePostDto;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;

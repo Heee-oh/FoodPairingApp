@@ -24,6 +24,7 @@ public class FoodPairController {
     // 아니면 프론트에서 따로 사진 저장 후 페어링 모델에 보내고,
     // 여기서는 음식 종류를 받고 wine 객체를 반환
 
+
     @GetMapping("/wine/{foodName}")
     @ResponseBody
     public List<Wine> pairing(@PathVariable String foodName) {

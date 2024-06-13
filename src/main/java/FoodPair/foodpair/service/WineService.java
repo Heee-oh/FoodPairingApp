@@ -11,10 +11,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class WineService {
 
-
     private final WineRepository wineRepository;
 
     public List<Wine> findWinesByPairingFood(String pairingFood) {
-        return wineRepository.findByPairingFood(pairingFood);
+        List<Wine> wines = wineRepository.findByFood(pairingFood);
+        return wines.isEmpty() ? wineRepository.findDefaultWine() : wines;
     }
 }

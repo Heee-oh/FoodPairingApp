@@ -61,9 +61,15 @@ public class CommunityController {
     }
 
     @GetMapping("/post")
-    public List<Post> findPosts() {
+    public List<PostDto> findPosts() {
         log.info("게시물 전체");
-        return postService.findAllPost();
+        List<PostDto> allPost = postService.findAllPost();
+
+        for (PostDto postDto : allPost) {
+            log.info("postDto={}",postDto);
+        }
+
+        return allPost;
     }
 
 

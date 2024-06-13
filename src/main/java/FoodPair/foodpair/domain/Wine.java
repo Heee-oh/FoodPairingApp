@@ -1,5 +1,6 @@
 package FoodPair.foodpair.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,13 +8,11 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "wine")
+
 public class Wine {
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int wineId;
-
 
     @Column(name = "name")
     private String name;
@@ -26,7 +25,7 @@ public class Wine {
 
     @Column(name = "pairing_food")
 
-    private String pairingFood;
+    private String food;
 
 
     @Column(name = "note")
@@ -40,7 +39,7 @@ public class Wine {
                 ", name='" + name + '\'' +
                 ", imageSrc='" + imageSrc + '\'' +
                 ", description='" + description + '\'' +
-                ", pairingFood='" + pairingFood + '\'' +
+                ", pairingFood='" + food + '\'' +
                 ", note='" + note + '\'' +
                 '}';
 
