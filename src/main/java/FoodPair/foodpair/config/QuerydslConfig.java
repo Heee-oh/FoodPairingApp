@@ -20,7 +20,6 @@ public class QuerydslConfig {
 
     private final CommentRepository commentRepository;
 
-    private final WineRepository wineRepository;
 
     private final JwtTokenProvider jwtTokenProvider;
     private final QuerydslFoodPairRepository querydslFoodPairRepository;

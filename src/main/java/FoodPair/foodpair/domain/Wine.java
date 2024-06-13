@@ -8,7 +8,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "wine")
-
 public class Wine {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,13 +23,36 @@ public class Wine {
     private String description;
 
     @Column(name = "pairing_food")
-
     private String food;
 
 
     @Column(name = "note")
     private String note;
 
+
+    public int getWineId() {
+        return wineId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getImageSrc() {
+        return imageSrc;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getFood() {
+        return food;
+    }
+
+    public String getNote() {
+        return note;
+    }
 
     @Override
     public String toString() {

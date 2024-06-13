@@ -34,17 +34,20 @@ public class QuerydslFoodPairRepository implements FoodPairRepository {
                 .where(qWine.food.contains(foodName))
                 .limit(3)
                 .fetch();
-        log.info("wine={}", allWine);
+
         return allWine;
     }
 
     @Override
     public List<Wine> findDefaultWines() {
         QWine qWine = QWine.wine;
-        return query.selectFrom(qWine)
+        List<Wine> fetch = query.selectFrom(qWine)
                 .where(qWine.food.isNull())
                 .limit(3)
                 .fetch();
+        log.info("winefff={}", fetch);
+        return fetch;
+
     }
 
 

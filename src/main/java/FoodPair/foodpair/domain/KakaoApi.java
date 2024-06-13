@@ -21,6 +21,7 @@ import java.util.HashMap;
 @Component
 public class KakaoApi {
 
+
     @Value("${kakao.api_key}")
     private String kakaoApiKey;
 

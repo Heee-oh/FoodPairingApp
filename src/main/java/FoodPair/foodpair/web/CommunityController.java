@@ -1,7 +1,7 @@
 package FoodPair.foodpair.web;
 
 import FoodPair.foodpair.domain.*;
-import FoodPair.foodpair.respository.WineRepository;
+
 import FoodPair.foodpair.service.PostService;
 import FoodPair.foodpair.service.WineService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -63,13 +63,8 @@ public class CommunityController {
     @GetMapping("/post")
     public List<PostDto> findPosts() {
         log.info("게시물 전체");
-        List<PostDto> allPost = postService.findAllPost();
+        return postService.findAllPost();
 
-        for (PostDto postDto : allPost) {
-            log.info("postDto={}",postDto);
-        }
-
-        return allPost;
     }
 
 

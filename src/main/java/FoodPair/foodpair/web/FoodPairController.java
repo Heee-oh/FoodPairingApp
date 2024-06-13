@@ -29,6 +29,7 @@ public class FoodPairController {
     @ResponseBody
     public List<Wine> pairing(@PathVariable String foodName) {
         List<Wine> pairedWine = foodPairRepository.findPairingWine(foodName);
+
         if (pairedWine.isEmpty()) {
             return foodPairRepository.findDefaultWines();
         }
