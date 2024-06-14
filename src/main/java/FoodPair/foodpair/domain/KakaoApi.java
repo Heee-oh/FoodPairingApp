@@ -116,11 +116,15 @@ public class KakaoApi {
 
             String result = responseSb.toString();
             log.info("responseBody = {}", result);
-
+            log.info("test");
             JsonNode rootNode = objectMapper.readTree(result);
             JsonNode properties = rootNode.get("properties");
             String nickname = properties.get("nickname").asText();
+            String image = properties.get("profile_image").asText();
             userInfo.put("nickname", nickname);
+            userInfo.put("image", image);
+            log.info("properties={}", properties);
+            log.info("image ={}", image);
 
             br.close();
 

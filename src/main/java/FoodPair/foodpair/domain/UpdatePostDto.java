@@ -12,14 +12,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class UpdatePostDto {
 
-
-
     private String content;
-
-    private Boolean anonStatus;
-
-    private Integer wineId;
-
     private LocalDateTime createAt;
 
 

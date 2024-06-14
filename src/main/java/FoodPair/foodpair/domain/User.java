@@ -6,9 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -22,6 +20,7 @@ public class User implements UserDetails {
     @Id
     private Long uuid;
     private String nickname;
+    private String image;
     @Column(name = "favorite_drink")
     private String favoriteDrink;
     @Column(name = "signup_date")
@@ -32,14 +31,18 @@ public class User implements UserDetails {
 
 
     public User() {
+
     }
 
-    public User(Long uuid, String nickname, String favoriteDrink) {
+    public User(Long uuid, String nickname, String image, String favoriteDrink) {
         this.uuid = uuid;
         this.nickname = nickname;
+        this.image = image;
         this.favoriteDrink = favoriteDrink;
-        this.createAt = LocalDateTime.now();
+
     }
+
+
 
     private void setFavorite_drink(String favoriteDrink) {
         this.favoriteDrink = favoriteDrink;

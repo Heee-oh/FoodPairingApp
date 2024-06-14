@@ -54,10 +54,12 @@ public class QuerydslFoodPairRepository implements FoodPairRepository {
     public List<PostDto> findAllPostsWithWine() {
         QPost qPost = QPost.post;
         QWine qWine = QWine.wine;
+        QUser qUser = QUser.user;
 
-        List<Tuple> fetch = query.select(qPost, qWine)
+        List<Tuple> fetch = query.select(qPost, qWine,qUser)
                 .from(qPost)
                 .join(qWine).on(qWine.wineId.eq(qPost.wineId))
+                .join(qUser).on(qUser.uuid.eq(qPost.uuid))
                 .orderBy(qPost.id.desc())
                 .fetch();
 
@@ -66,7 +68,8 @@ public class QuerydslFoodPairRepository implements FoodPairRepository {
         for (Tuple tuple : fetch) {
             Post post = tuple.get(qPost);
             Wine wine = tuple.get(qWine);
-            PostDto postDto = new PostDto(post, wine);
+            User user = tuple.get(qUser);
+            PostDto postDto = new PostDto(post, wine, user);
             postDtos.add(postDto);
         }
 

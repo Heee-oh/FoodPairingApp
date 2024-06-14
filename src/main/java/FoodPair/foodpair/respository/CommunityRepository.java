@@ -19,7 +19,6 @@ public interface CommunityRepository extends JpaRepository<Post, Integer> {
     // 본인 작성 글 조회
     List<Post> findPostsByUuid(long uuid);
 
-
     // 조회수 업데이트
     @Modifying
     @Query("update community set viewCount = viewCount + 1 where id = :id")
@@ -50,7 +49,7 @@ public interface CommunityRepository extends JpaRepository<Post, Integer> {
     Integer findCheckLikeById(int id, long uuid);
 
     @Modifying
-    @Query(value = "update community set content = :content, anon_status=:anonStatus, wine_id=:windId where post_id=:id", nativeQuery = true)
-    void updatePost(@Param("id") int id, @Param("content") String content, @Param("anonStatus") boolean anonStatus, @Param("windId") int windId );
+    @Query(value = "update community set content = :content where post_id=:id", nativeQuery = true)
+    void updatePost(@Param("id") int id, @Param("content") String content);
 
 }

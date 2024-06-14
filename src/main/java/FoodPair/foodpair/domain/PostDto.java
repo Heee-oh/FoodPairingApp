@@ -13,22 +13,23 @@ import java.util.Map;
 @Slf4j
 public class PostDto {
 
+
     private Post post;
     private Wine wine;
+    private User user;
 
-
-    public PostDto(Post post, Wine wine) {
+    public PostDto(Post post, Wine wine, User user) {
         this.post = post;
         this.wine = wine;
+        this.user = user;
     }
 
     @Override
     public String toString() {
-        log.info("post={}", post);
-        log.info("wine={}", wine);
         return "PostDto{" +
                 "post=" + post +
                 ", wine=" + wine +
+                ", user=" + user +
                 '}';
     }
 }

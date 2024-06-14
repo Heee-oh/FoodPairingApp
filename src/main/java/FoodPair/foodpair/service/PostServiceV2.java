@@ -58,7 +58,7 @@ public class PostServiceV2 implements PostService {
     @Override
     public void update(int postId, UpdatePostDto updatePostDto) {
         updatePostDto.setCreateAt(LocalDateTime.now());
-        communityRepository.updatePost(postId, updatePostDto.getContent(), updatePostDto.getAnonStatus(), updatePostDto.getWineId());
+        communityRepository.updatePost(postId, updatePostDto.getContent());
     }
 
     /**

@@ -3,6 +3,7 @@ package FoodPair.foodpair.web;
 import FoodPair.foodpair.domain.*;
 
 import FoodPair.foodpair.service.PostService;
+import FoodPair.foodpair.service.UserService;
 import FoodPair.foodpair.service.WineService;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,8 @@ public class CommunityController {
     private final PostService postService;
     private final JwtTokenProvider jwtTokenProvider;
     private final WineService wineService;
+    private final UserService userService;
+
 
     @GetMapping("/hello1")
     public String test() {
@@ -45,8 +48,9 @@ public class CommunityController {
     // 새로운 domain을 만드는것을 고려
 
     @GetMapping("/post/{postId}")
-    public Optional<GetPostDto> postDetail(@PathVariable int postId) {
-        return Optional.of(new GetPostDto(postService.findById(postId).get(), postService.findComments(postId)));
+    public Optional<GetPostDto> postDetail(@PathVariable int postId, HttpServletRequest request) {
+        String userPk = jwtTokenProvider.getUserPk(jwtTokenProvider.resolveToken(request));
+        return Optional.of(new GetPostDto(userService.findById(Long.parseLong(userPk)).get(), postService.findById(postId).get(), postService.findComments(postId)));
     }
 
     @PostMapping("/post/{postId}")

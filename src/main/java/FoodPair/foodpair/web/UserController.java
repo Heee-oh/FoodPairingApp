@@ -46,7 +46,8 @@ public class UserController {
         User user = userRepository.findById(Uuid).orElse(null);
 
         if (user == null) {
-             user = userRepository.save(new User(Uuid, (String) kakaoApi.getUserInfo(accessToken).get("nickname"), ""));
+             user = userRepository.save(new User(Uuid, (String) kakaoApi.getUserInfo(accessToken).get("nickname")
+                     , (String) kakaoApi.getUserInfo(accessToken).get("image"), ""));
 
         }
 
